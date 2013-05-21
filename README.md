@@ -38,3 +38,7 @@ You can also use a Rails template by passing `TEMPLATE` environment variable.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Credits
+
+This gem was extracted from the [http://coursewa.re](Coursewa.re) project.

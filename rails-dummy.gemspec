@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["stas@net.utcluj.ro"]
   spec.description   = %q{Rake task to generate a dummy Rails app.}
   spec.summary       = %q{Use it to generate a dummy app for RSpec}
-  spec.homepage      = "https://github.com/stas/rails-dummy"
+  spec.homepage      = "https://github.com/courseware/rails-dummy"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
