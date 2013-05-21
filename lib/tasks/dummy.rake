@@ -1,6 +1,6 @@
 namespace :dummy do
   desc 'Generates a dummy app for testing. Use options: `DUMMY_PATH` and `ENGINE`'
-  task :app => [:setup, :install_migrations, :migrate]
+  task :app => [:setup, :template, :install_migrations, :migrate]
 
   task :setup do
     path = ENV['DUMMY_PATH'] || 'spec/dummy'
@@ -10,6 +10,16 @@ namespace :dummy do
     Rails::Dummy::Generator.start(
       %W(. -q -f --skip-bundle -T -G --dummy-path=#{dummy})
     )
+  end
+
+  task :template do
+    unless ENV['TEMPLATE']
+      puts 'No `TEMPLATE` environment variable was set, no template to apply.'
+    else
+      rakefile = File.expand_path('Rakefile')
+      template = File.expand_path(ENV['TEMPLATE'], '../../')
+      sh("rake -f #{rakefile} rails:template LOCATION=#{template}")
+    end
   end
 
   task :install_migrations do

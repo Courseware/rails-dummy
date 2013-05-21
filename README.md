@@ -29,6 +29,8 @@ Now you should be able to run:
 You can use environment variables `DUMMY_PATH` and `ENGINE` to specify the
 engine name migrations to run and the path for the dummy app.
 
+You can also use a Rails template by passing `TEMPLATE` environment variable.
+
 ## Contributing
 
 1. Fork it
