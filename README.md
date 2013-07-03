@@ -31,6 +31,11 @@ engine name migrations to run and the path for the dummy app.
 
 You can also use a Rails template by passing `TEMPLATE` environment variable.
 
+## Projects using this gem
+
+* [Coursewa.re](http://coursewa.re/about)
+* [easy_auth-angel_list](https://github.com/geekcelerator/easy_auth-angel_list)
+
 ## Contributing
 
 1. Fork it
