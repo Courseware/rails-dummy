@@ -3,9 +3,7 @@ namespace :dummy do
   task :app => [:setup, :template, :install_migrations, :migrate]
 
   task :setup do
-    path = ENV['DUMMY_PATH'] || 'spec/dummy'
-    dummy = File.expand_path(path)
-
+    dummy = File.expand_path(dummy_path)
     sh("rm -rf #{dummy}")
     Rails::Dummy::Generator.start(
       %W(. -q -f --skip-bundle -T -G --dummy-path=#{dummy})
@@ -37,4 +35,7 @@ namespace :dummy do
     sh("rake -f #{rakefile} db:create db:migrate db:test:prepare")
   end
 
+  def dummy_path
+    ENV['DUMMY_PATH'] || 'spec/dummy'
+  end
 end
