@@ -26,15 +26,22 @@ Now you should be able to run:
 
     rake dummy:app
 
-You can use environment variables `DUMMY_PATH` and `ENGINE` to specify the
-engine name migrations to run and the path for the dummy app.
 
-You can also use a Rails template by passing `TEMPLATE` environment variable.
+## Customization by environment variables: 
+
+`DUMMY_PATH` - specify path where dummy app will be located. Defaults to `spec/dummy`.
+
+`TEMPLATE` - Use a Rails template by passing  environment variable. Defaults to nil; creates generic Rails app.
+
+`ENGINE` - specify engine name migrations to be installed via `rake ENGINE:install:migrations`. Defaults to nil; engine specific migrations are not installed.
+
+`DISABLE_MIGRATE` - Does not run `db:migrate db:test:prepare` after creating database.
 
 ## Projects using this gem
 
 * [Coursewa.re](http://coursewa.re/about)
 * [easy_auth-angel_list](https://github.com/geekcelerator/easy_auth-angel_list)
+* [questionnaire_engine](http://github.com/twinge/questionnaire_engine)
 
 ## Contributing
 
