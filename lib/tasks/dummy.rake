@@ -47,6 +47,6 @@ namespace :dummy do
   end
   
   def dummy_path
-    ENV['DUMMY_PATH'] || 'spec/dummy'
+    ENV['DUMMY_APP_PATH'] || 'spec/dummy'
   end
 end

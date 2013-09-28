@@ -29,7 +29,7 @@ Now you should be able to run:
 
 ## Customization by environment variables: 
 
-`DUMMY_PATH` - Specify path where dummy app will be located. Defaults to `spec/dummy`.
+`DUMMY_APP_PATH` - Specify path where dummy app will be located. Defaults to `spec/dummy`.
 
 `TEMPLATE` - Use a Rails template by passing  environment variable. Defaults to nil; creates generic Rails app.
 
