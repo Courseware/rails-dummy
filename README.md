@@ -31,11 +31,15 @@ Now you should be able to run:
 
 `DUMMY_APP_PATH` - Specify path where dummy app will be located. Defaults to `spec/dummy`.
 
-`TEMPLATE` - Use a Rails template by passing  environment variable. Defaults to nil; creates generic Rails app.
+`TEMPLATE` - Specify a Rails template by path location variable. Defaults to nil; creates generic Rails app.
 
 `ENGINE` - Specify engine name migrations to be installed via `rake ENGINE:install:migrations`. Defaults to nil; engine specific migrations are not installed.
 
-`DISABLE_MIGRATE` - Does not run `db:migrate db:test:prepare` after creating database.
+`DISABLE_CREATE` - Don't run `db:create`.
+
+`DISABLE_MIGRATE` - Don't run `db:migrate db:test:prepare` after creating database.
+
+
 
 ## Projects using this gem
 

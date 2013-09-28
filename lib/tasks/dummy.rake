@@ -37,7 +37,7 @@ namespace :dummy do
   task :create do 
     # File.expand_path is executed directory of generated Rails app
     rakefile = File.expand_path('Rakefile')
-    sh("rake -f #{rakefile} db:create")
+    sh("rake -f #{rakefile} db:create") unless ENV["DISABLE_CREATE"]
   end
   
   task :migrate do
