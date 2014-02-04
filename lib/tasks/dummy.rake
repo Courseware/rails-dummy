@@ -6,11 +6,7 @@ namespace :dummy do
 
   task :setup do
     dummy = File.expand_path(dummy_path)
-    if Gem.win_platform?
-      sh("rmdir /s /q #{dummy}")
-    else
-      sh("rm -rf #{dummy}")
-    end
+    FileUtils.rm_r dummy
     Rails::Dummy::Generator.start(
       %W(. -q -f --skip-bundle -T -G --dummy-path=#{dummy})
     )
