@@ -6,9 +6,9 @@ namespace :dummy do
 
   task :setup do
     dummy = File.expand_path(dummy_path)
-    sh("rm -rf #{dummy}")
+    FileUtils.rm_r dummy
     Rails::Dummy::Generator.start(
-      %W(. -q -f --skip-bundle -T -G --dummy-path=#{dummy})
+      %W(. -q -f --skip-bundle -T -G --dummy-path=\"#{dummy}\")
     )
   end
 
@@ -19,7 +19,7 @@ namespace :dummy do
       # File.expand_path is executed directory of generated Rails app
       rakefile = File.expand_path('Rakefile')
       template = File.expand_path(ENV['TEMPLATE'], @original_dir)      
-      sh("rake -f #{rakefile} rails:template LOCATION=#{template}")
+      sh("rake -f \"#{rakefile}\" rails:template LOCATION=\"#{template}\"")
     end
   end
 
@@ -30,20 +30,20 @@ namespace :dummy do
     else
       # File.expand_path is executed directory of generated Rails app
       rakefile = File.expand_path('Rakefile')
-      sh("rake -f #{rakefile} #{engine.downcase}:install:migrations")
+      sh("rake -f \"#{rakefile}\" #{engine.downcase}:install:migrations")
     end
   end
   
   task :create do 
     # File.expand_path is executed directory of generated Rails app
     rakefile = File.expand_path('Rakefile')
-    sh("rake -f #{rakefile} db:create") unless ENV["DISABLE_CREATE"]
+    sh("rake -f \"#{rakefile}\" db:create") unless ENV["DISABLE_CREATE"]
   end
   
   task :migrate do
     # File.expand_path is executed directory of generated Rails app
     rakefile = File.expand_path('Rakefile')
-    sh("rake -f #{rakefile} db:migrate db:test:prepare") unless ENV["DISABLE_MIGRATE"]
+    sh("rake -f \"#{rakefile}\" db:migrate db:test:prepare") unless ENV["DISABLE_MIGRATE"]
   end
   
   def dummy_path
