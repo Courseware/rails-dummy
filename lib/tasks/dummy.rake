@@ -8,7 +8,7 @@ namespace :dummy do
     dummy = File.expand_path(dummy_path)
     FileUtils.rm_r dummy
     Rails::Dummy::Generator.start(
-      %W(. -q -f --skip-bundle -T -G --dummy-path=#{dummy})
+      %W(. -q -f --skip-bundle -T -G --dummy-path=\"#{dummy}\")
     )
   end
 
@@ -19,7 +19,7 @@ namespace :dummy do
       # File.expand_path is executed directory of generated Rails app
       rakefile = File.expand_path('Rakefile')
       template = File.expand_path(ENV['TEMPLATE'], @original_dir)      
-      sh("rake -f \"#{rakefile}\" rails:template LOCATION=#{template}")
+      sh("rake -f \"#{rakefile}\" rails:template LOCATION=\"#{template}\"")
     end
   end
 
