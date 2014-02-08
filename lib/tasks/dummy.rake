@@ -6,7 +6,7 @@ namespace :dummy do
 
   task :setup do
     dummy = File.expand_path(dummy_path)
-    sh("rm -rf #{dummy}")
+    FileUtils.rm_rf(dummy)
     Rails::Dummy::Generator.start(
       %W(. -q -f --skip-bundle -T -G --dummy-path=#{dummy})
     )
