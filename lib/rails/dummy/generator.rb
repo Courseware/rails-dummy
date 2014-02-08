@@ -1,6 +1,6 @@
 require 'rails/generators'
 require 'rails/generators/rails/plugin_new/plugin_new_generator'
-require "rails/dummy/version"
+require 'rails/dummy/version'
 
 module Rails
   module Dummy
@@ -24,6 +24,7 @@ module Rails
       alias :update_gemfile :do_nothing
       alias :create_test_files :do_nothing
       alias :finish_template :do_nothing
+      alias :create_bin_files :do_nothing
 
     end
   end
