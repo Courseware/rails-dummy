@@ -1,5 +1,7 @@
 # Rails::Dummy
 
+[![Build Status](https://travis-ci.org/Courseware/rails-dummy.png?branch=master)](https://travis-ci.org/Courseware/rails-dummy)
+
 A simple task to generate a dummy app for engines using RSpec or Test::Unit.
 
 ## Installation
@@ -26,8 +28,7 @@ Now you should be able to run:
 
     rake dummy:app
 
-
-## Customization by environment variables: 
+## Customization by environment variables:
 
 `DUMMY_APP_PATH` - Specify path where dummy app will be located. Defaults to `spec/dummy`.
 
@@ -39,8 +40,6 @@ Now you should be able to run:
 
 `DISABLE_MIGRATE` - Don't run `db:migrate db:test:prepare` after creating database.
 
-
-
 ## Projects using this gem
 
 * [Coursewa.re](http://coursewa.re/about)
@@ -51,7 +50,7 @@ Now you should be able to run:
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
+3. Commit your changes. Write some tests. (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
