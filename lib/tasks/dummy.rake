@@ -1,5 +1,5 @@
 namespace :dummy do
-  desc 'Generates a dummy app for testing. Use options: `DUMMY_PATH` and `ENGINE`'
+  desc 'Generates a dummy app for testing. Use options: `DUMMY_APP_PATH` and `ENGINE`'
   task :app => [:setup, :template, :install_migrations, :create, :migrate]
 
   task :setup do
