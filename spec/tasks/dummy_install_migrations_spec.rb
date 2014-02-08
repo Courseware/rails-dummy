@@ -15,8 +15,8 @@ describe 'dummy:install_migrations' do
 
     before do
       ENV['ENGINE'] = engine_name
-      rakefile = File.expand_path('../../../Rakefile', __FILE__)
-      command = 'rake -f %s %s:install:migrations' % [
+      rakefile = File.expand_path('../../dummy/Rakefile', __FILE__)
+      command = "rake -f '%s' %s:install:migrations" % [
         rakefile, engine_name.downcase ]
       # An equivalent of mocking `sh` method
       Rake::AltSystem.should_receive(:system).with(command).and_return(true)

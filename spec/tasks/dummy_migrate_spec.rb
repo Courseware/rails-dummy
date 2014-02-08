@@ -20,8 +20,8 @@ describe 'dummy:migrate' do
 
   context 'when DISABLE_MIGRATE variable is not set' do
     before do
-      rakefile = File.expand_path('../../../Rakefile', __FILE__)
-      command = 'rake -f %s db:migrate db:test:prepare' % [rakefile]
+      rakefile = File.expand_path('../../dummy/Rakefile', __FILE__)
+      command = "rake -f '%s' db:migrate db:test:prepare" % rakefile
       # An equivalent of mocking `sh` method
       Rake::AltSystem.should_receive(:system).with(command).and_return(true)
     end

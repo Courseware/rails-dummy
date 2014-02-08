@@ -15,9 +15,11 @@ describe 'dummy:template' do
 
     before do
       ENV['TEMPLATE'] = template
-      rakefile = File.expand_path('../../../Rakefile', __FILE__)
-      template_path = File.expand_path(File.join('../../../', template), __FILE__)
-      command = 'rake -f "%s" rails:template LOCATION="%s"' % [
+      rakefile = File.expand_path('../../dummy/Rakefile', __FILE__)
+      template_path = File.expand_path(
+        template, File.expand_path('../../../', __FILE__))
+
+      command = "rake -f '%s' rails:template LOCATION='%s'" % [
         rakefile, template_path ]
       # An equivalent of mocking `sh` method
       Rake::AltSystem.should_receive(:system).with(command).and_return(true)

@@ -7,7 +7,7 @@ describe 'dummy:setup' do
     full_dummy_path = File.expand_path("../../../#{dummy_path}", __FILE__)
     FileUtils.should_receive(:rm_rf).with(full_dummy_path)
     Rails::Dummy::Generator.should_receive(:start).with(
-      %W(. -q -f --skip-bundle -T -G --dummy-path=\"#{full_dummy_path}\")
+      %W(. -q -f --skip-bundle -T -G --dummy-path=#{full_dummy_path})
     )
   end
 
