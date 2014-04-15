@@ -1,13 +1,13 @@
 require 'rails/generators'
-require 'rails/generators/rails/plugin_new/plugin_new_generator'
+require 'rails/generators/rails/plugin/plugin_generator'
 require 'rails/dummy/version'
 
 module Rails
   module Dummy
 
-    class Generator < Rails::Generators::PluginNewGenerator
+    class Generator < Rails::Generators::PluginGenerator
       def self.default_source_root
-        Rails::Generators::PluginNewGenerator.default_source_root
+        Rails::Generators::PluginGenerator.default_source_root
       end
 
       def do_nothing
