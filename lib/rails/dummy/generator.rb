@@ -1,3 +1,4 @@
+require 'rails'
 require 'rails/generators'
 require 'rails/generators/rails/plugin_new/plugin_new_generator' if Rails.version.to_f >= 3.1 && Rails.version.to_f <= 4.0
 require 'rails/generators/rails/plugin/plugin_generator' if Rails.version.to_f >= 4.1
@@ -11,7 +12,7 @@ module Rails
 
     class Generator < generator_class
       def self.default_source_root
-        generator_class.default_source_root
+        superclass.default_source_root
       end
 
       def do_nothing
