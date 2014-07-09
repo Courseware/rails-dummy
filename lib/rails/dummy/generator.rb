@@ -1,16 +1,26 @@
 require 'rails'
 require 'rails/generators'
-require 'rails/generators/rails/plugin_new/plugin_new_generator' if Rails.version.to_f >= 3.1 && Rails.version.to_f <= 4.0
-require 'rails/generators/rails/plugin/plugin_generator' if Rails.version.to_f >= 4.1
 require 'rails/dummy/version'
+
+begin
+  require 'rails/generators/rails/plugin_new/plugin_new_generator'
+rescue LoadError
+  require 'rails/generators/rails/plugin/plugin_generator'
+end
 
 module Rails
   module Dummy
 
-    generator_class = Rails::Generators::PluginNewGenerator if Rails.version.to_f >= 3.1 && Rails.version.to_f <= 4.0
-    generator_class = Rails::Generators::PluginGenerator if Rails.version.to_f >= 4.1
+    def self.generator_class
+      begin
+        Rails::Generators::PluginNewGenerator
+      rescue
+        Rails::Generators::PluginGenerator
+      end
+    end
 
-    class Generator < generator_class
+    class Generator < Rails::Dummy.generator_class
+
       def self.default_source_root
         superclass.default_source_root
       end
