@@ -18,8 +18,9 @@ describe 'dummy:migrate' do
     end
   end
 
-  context 'when DISABLE_MIGRATE variable is not set' do
+  context 'when DISABLE_MIGRATE variable is not set (pre RAILS 4.1)' do
     before do
+      stub_const("::Rails::VERSION::STRING", 3.2)
       rakefile = File.expand_path('../../dummy/Rakefile', __FILE__)
       command = "rake -f '%s' db:migrate db:test:prepare" % rakefile
       # An equivalent of mocking `sh` method
@@ -27,6 +28,20 @@ describe 'dummy:migrate' do
     end
 
     it 'calls rake with db:migrate db:test:prepare task' do
+      task.invoke
+    end
+  end
+
+  context 'when DISABLE_MIGRATE variable is not set (post RAILS 4.1)' do
+    before do
+      stub_const("::Rails::VERSION::STRING", 4.1)
+      rakefile = File.expand_path('../../dummy/Rakefile', __FILE__)
+      command = "rake -f '%s' db:migrate" % rakefile
+      # An equivalent of mocking `sh` method
+      Rake::AltSystem.should_receive(:system).with(command).and_return(true)
+    end
+
+    it 'calls rake with db:migrate task' do
       task.invoke
     end
   end

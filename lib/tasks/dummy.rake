@@ -47,7 +47,8 @@ namespace :dummy do
   task :migrate do
     # File.expand_path is executed directory of generated Rails app
     rakefile = File.expand_path('Rakefile', dummy_path)
-    command = "rake -f '%s' db:migrate db:test:prepare" % rakefile
+    command = "rake -f '%s' db:migrate" % rakefile
+    command << " db:test:prepare" if ::Rails::VERSION::STRING.to_f < 4.1 
     sh(command) unless ENV["DISABLE_MIGRATE"]
   end
 
