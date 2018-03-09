@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'dummy:template' do
+describe 'dummy:template', type: :task do
 
   context 'when TEMPLATE variable was not set' do
     before { Kernel.should_receive(:puts) }

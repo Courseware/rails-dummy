@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'dummy:app' do
+describe 'dummy:app', type: :task do
   its(:prerequisites) { should include('setup') }
   its(:prerequisites) { should include('template') }
   its(:prerequisites) { should include('install_migrations') }

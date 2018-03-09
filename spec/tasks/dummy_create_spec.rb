@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'dummy:create' do
+describe 'dummy:create', type: :task do
 
   context 'when DISABLE_CREATE variable is set' do
     before do

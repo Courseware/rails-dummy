@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'dummy:install_migrations' do
+describe 'dummy:install_migrations', type: :task do
 
   context 'when ENGINE variable was not set' do
     before { Kernel.should_receive(:puts) }

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'dummy:setup' do
+describe 'dummy:setup', type: :task do
   let(:dummy_path) { 'spec/dummy' }
 
   before do

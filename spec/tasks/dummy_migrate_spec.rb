@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'dummy:migrate' do
+describe 'dummy:migrate', type: :task do
 
   context 'when DISABLE_MIGRATE variable is set' do
     before do
