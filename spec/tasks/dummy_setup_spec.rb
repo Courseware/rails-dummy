@@ -7,7 +7,11 @@ describe 'dummy:setup', type: :task do
     full_dummy_path = File.expand_path("../../../#{dummy_path}", __FILE__)
     expect(FileUtils).to receive(:rm_rf).with(full_dummy_path)
     expect(Rails::Dummy::Generator).to receive(:start).with(
-      %W(. -q -f --skip-bundle -T -G --dummy-path=#{full_dummy_path})
+      %W(
+        . -q -f --skip-bundle -T -G
+        --dummy-path=#{full_dummy_path}
+        --database=sqlite3
+      )
     )
   end
 

@@ -30,11 +30,17 @@ Now you should be able to run:
 
 ## Customization by environment variables:
 
-`DUMMY_APP_PATH` - Specify path where dummy app will be located. Defaults to `spec/dummy`.
+`DUMMY_APP_PATH` - Specify path where dummy app will be located. Defaults to
+`spec/dummy`.
 
-`TEMPLATE` - Specify a Rails template by path location variable. Defaults to nil; creates generic Rails app.
+`TEMPLATE` - Specify a Rails template by path location variable. Defaults to
+nil; creates generic Rails app.
 
-`ENGINE` - Specify engine name migrations to be installed via `rake ENGINE:install:migrations`. Defaults to nil; engine specific migrations are not installed.
+`ENGINE` - Specify engine name migrations to be installed via `rake
+ENGINE:install:migrations`. Defaults to nil; engine specific migrations are not
+installed.
+
+`ENGINE_DB` - Specify engine database. Defaults to `sqlite3`.
 
 `DISABLE_CREATE` - Don't run `db:create`.
 

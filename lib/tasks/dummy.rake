@@ -1,18 +1,26 @@
 namespace :dummy do
-  desc 'Generates a dummy app for testing. Use options: `DUMMY_APP_PATH` and `ENGINE`'
+  desc(
+    'Generates a dummy app for testing.'\
+    'Use options: `DUMMY_APP_PATH`, `ENGINE` and `ENGINE_DB`'
+  )
   task :app => [:setup, :template, :install_migrations, :create, :migrate]
 
   task :setup do
     dummy = File.expand_path(dummy_path)
+    database = ENV['ENGINE_DB'] || 'sqlite3'
+
     FileUtils.rm_rf(dummy)
     params = %W{. -q -f --skip-bundle -T -G}
     params << '--dummy-path=%s' % dummy
+    params << '--database=%s' % database
     Rails::Dummy::Generator.start(params)
   end
 
   task :template do
     unless ENV['TEMPLATE']
-      Kernel.puts 'No `TEMPLATE` environment variable was set, no template to apply.'
+      Kernel.puts(
+        'No `TEMPLATE` environment variable was set, no template to apply.'
+      )
     else
       # File.expand_path is executed directory of generated Rails app
       rakefile = File.expand_path('Rakefile', dummy_path)
@@ -27,7 +35,9 @@ namespace :dummy do
   task :install_migrations do
     engine = ENV['ENGINE']
     unless engine
-      Kernel.puts 'No `ENGINE` environment variable was set, no migrations to install.'
+      Kernel.puts(
+        'No `ENGINE` environment variable was set, no migrations to install.'
+      )
     else
       # File.expand_path is executed directory of generated Rails app
       rakefile = File.expand_path('Rakefile', dummy_path)
@@ -48,7 +58,7 @@ namespace :dummy do
     # File.expand_path is executed directory of generated Rails app
     rakefile = File.expand_path('Rakefile', dummy_path)
     command = "rake -f '%s' db:migrate" % rakefile
-    command << " db:test:prepare" if ::Rails::VERSION::STRING.to_f < 4.1 
+    command << " db:test:prepare" if ::Rails::VERSION::STRING.to_f < 4.1
     sh(command) unless ENV["DISABLE_MIGRATE"]
   end
 

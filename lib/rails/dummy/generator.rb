@@ -40,6 +40,7 @@ module Rails
       alias_method :create_test_files, :do_nothing
       alias_method :finish_template, :do_nothing
       alias_method :create_bin_files, :do_nothing
+      alias_method :create_images_directory, :do_nothing
     end
   end
 end
