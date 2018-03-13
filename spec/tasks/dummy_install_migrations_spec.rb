@@ -2,14 +2,6 @@ require 'spec_helper'
 
 describe 'dummy:install_migrations', type: :task do
 
-  context 'when ENGINE variable was not set' do
-    before { Kernel.should_receive(:puts) }
-
-    it 'calls puts with a notice message' do
-      task.invoke
-    end
-  end
-
   context 'when ENGINE variable is set' do
     let(:engine_name) { 'TEST_ENGINE' }
 
@@ -18,8 +10,10 @@ describe 'dummy:install_migrations', type: :task do
       rakefile = File.expand_path('../../dummy/Rakefile', __FILE__)
       command = "rake -f '%s' %s:install:migrations" % [
         rakefile, engine_name.downcase ]
-      # An equivalent of mocking `sh` method
-      Rake::AltSystem.should_receive(:system).with(command).and_return(true)
+
+      expect_any_instance_of(::Kernel).to(
+        receive(:system).with(command, {}).and_return(true)
+      )
     end
 
     after do

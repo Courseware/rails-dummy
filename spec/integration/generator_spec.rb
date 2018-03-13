@@ -19,6 +19,6 @@ describe Rails::Dummy::Generator do
     params << dummy_path
     Rails::Dummy::Generator.start(params)
 
-    Dir[File.join(@current_path, dummy_path, '*')].should_not be_empty
+    expect(Dir[File.join(@current_path, dummy_path, '*')]).to_not be_empty
   end
 end

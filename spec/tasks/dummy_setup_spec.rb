@@ -5,8 +5,8 @@ describe 'dummy:setup', type: :task do
 
   before do
     full_dummy_path = File.expand_path("../../../#{dummy_path}", __FILE__)
-    FileUtils.should_receive(:rm_rf).with(full_dummy_path)
-    Rails::Dummy::Generator.should_receive(:start).with(
+    expect(FileUtils).to receive(:rm_rf).with(full_dummy_path)
+    expect(Rails::Dummy::Generator).to receive(:start).with(
       %W(. -q -f --skip-bundle -T -G --dummy-path=#{full_dummy_path})
     )
   end

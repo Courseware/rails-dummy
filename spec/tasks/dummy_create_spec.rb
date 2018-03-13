@@ -5,8 +5,8 @@ describe 'dummy:create', type: :task do
   context 'when DISABLE_CREATE variable is set' do
     before do
       ENV['DISABLE_CREATE'] = '1'
-      # An equivalent of mocking `sh` method
-      Rake::AltSystem.should_not_receive(:system)
+
+      expect_any_instance_of(::Kernel).not_to receive(:system)
     end
 
     after do
@@ -22,8 +22,10 @@ describe 'dummy:create', type: :task do
     before do
       rakefile = File.expand_path('../../dummy/Rakefile', __FILE__)
       command = "rake -f '%s' db:create" % [rakefile]
-      # An equivalent of mocking `sh` method
-      Rake::AltSystem.should_receive(:system).with(command).and_return(true)
+
+      expect_any_instance_of(::Kernel).to(
+        receive(:system).with(command, {}).and_return(true)
+      )
     end
 
     it 'calls rake with db:create task' do
