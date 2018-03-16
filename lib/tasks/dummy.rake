@@ -65,7 +65,12 @@ namespace :dummy do
 
   def dummy_path
     rel_path = ENV['DUMMY_APP_PATH'] || 'spec/dummy'
-    File.expand_path(rel_path)
+
+    if @current_path.to_s.include?(rel_path)
+      @current_path
+    else
+      @current_path = File.expand_path(rel_path)
+    end
   end
 
   # Replaces the `database.yml` file with a version to allow reading from env.
