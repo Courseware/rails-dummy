@@ -6,14 +6,15 @@ namespace :dummy do
   task :app => [:setup, :template, :install_migrations, :create, :migrate]
 
   task :setup do
-    dummy = File.expand_path(dummy_path)
     database = ENV['ENGINE_DB'] || 'sqlite3'
 
-    FileUtils.rm_rf(dummy)
+    FileUtils.rm_rf(dummy_path)
     params = %W{. -q -f --skip-bundle -T -G}
-    params << '--dummy-path=%s' % dummy
+    params << '--dummy-path=%s' % dummy_path
     params << '--database=%s' % database
     Rails::Dummy::Generator.start(params)
+
+    patch_database_config(dummy_path) if ENV['ENGINE_DB']
   end
 
   task :template do
@@ -64,10 +65,22 @@ namespace :dummy do
 
   def dummy_path
     rel_path = ENV['DUMMY_APP_PATH'] || 'spec/dummy'
-    if @current_path.to_s.include?(rel_path)
-      @current_path
-    else
-      @current_path = File.expand_path(rel_path)
-    end
+    File.expand_path(rel_path)
+  end
+
+  # Replaces the `database.yml` file with a version to allow reading from env.
+  #
+  # See: https://github.com/rails/rails/issues/28827
+  def patch_database_config(path)
+    db_config_path = File.expand_path('config/database.yml', path)
+    content = <<-YML
+test:
+  url: <%= ENV['DATABASE_URL'] %>
+development:
+  url: <%= ENV['DATABASE_URL'] %>
+production:
+  url: <%= ENV['DATABASE_URL'] %>
+    YML
+    open(db_config_path, 'w').write(content)
   end
 end
