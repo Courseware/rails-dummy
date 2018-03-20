@@ -81,10 +81,6 @@ namespace :dummy do
     content = <<-YML
 test:
   url: <%= ENV['DATABASE_URL'] %>
-development:
-  url: <%= ENV['DATABASE_URL'] %>
-production:
-  url: <%= ENV['DATABASE_URL'] %>
     YML
     open(db_config_path, 'w').write(content)
   end
