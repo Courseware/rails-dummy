@@ -15,7 +15,7 @@ describe Rails::Dummy::Generator do
   end
 
   it 'creates a dummy app' do
-    params = [dummy_path] + %W{-q -f --skip-bundle -T -G --dummy-path}
+    params = [dummy_path] + %W{-q -f --skip-bundle -T -G}
     Rails::Dummy::Generator.start(params)
 
     expect(Dir[File.join(@current_path, dummy_path, '*')]).to_not be_empty

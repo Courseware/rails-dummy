@@ -1,16 +1,20 @@
 namespace :dummy do
   desc(
     'Generates a dummy app for testing.'\
-    'Use options: `DUMMY_APP_PATH`, `ENGINE` and `ENGINE_DB`'
+    'Use $DUMMY_APP_PATH and $ENGINE`'\
+    'to overwrite the location and integrate with a Rails engine.'\
+    'Create a .dummyrc (aka .railsrc) file to customize the generator options.'
   )
   task :app => [:setup, :template, :install_migrations, :create, :migrate]
 
   task :setup do
-    database = ENV['ENGINE_DB'] || 'sqlite3'
-
     FileUtils.rm_rf(dummy_path)
+
     params = [dummy_path] + %W{-q -f --skip-bundle -T -G}
-    params << '--database=%s' % database
+
+    params += File.read(File.expand_path('.dummyrc'))
+      .to_s.split("\n").compact if File.exists?('.dummyrc')
+
     Rails::Dummy::Generator.start(params)
 
     patch_database_config(dummy_path) if ENV['ENGINE_DB']

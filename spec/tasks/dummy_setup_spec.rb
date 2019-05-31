@@ -18,10 +18,18 @@ describe 'dummy:setup', type: :task do
     end
   end
 
+  before do
+    File.write(File.expand_path('.dummyrc'), "--database=#{db_type}\n")
+  end
+
+  after do
+    File.unlink(File.expand_path('.dummyrc'))
+  end
+
   include_examples 'setup task'
 
   context 'using ENGINE_DB environment variable' do
-    let(:db_type) { ENV['ENGINE_DB'] = 'postgresql' }
+    let(:db_type) { 'postgresql' }
 
     after { ENV.delete('ENGINE_DB') }
 
