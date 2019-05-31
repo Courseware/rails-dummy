@@ -10,9 +10,7 @@ describe 'dummy:setup', type: :task do
       expect(FileUtils).to receive(:rm_rf).with(full_dummy_path)
       expect(Rails::Dummy::Generator).to receive(:start).with(
         %W(
-          . -q -f --skip-bundle -T -G
-          --dummy-path=#{full_dummy_path}
-          --database=#{db_type}
+          #{full_dummy_path} -q -f --skip-bundle -T -G --database=#{db_type}
         )
       )
 

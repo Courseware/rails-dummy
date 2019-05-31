@@ -9,8 +9,7 @@ namespace :dummy do
     database = ENV['ENGINE_DB'] || 'sqlite3'
 
     FileUtils.rm_rf(dummy_path)
-    params = %W{. -q -f --skip-bundle -T -G}
-    params << '--dummy-path=%s' % dummy_path
+    params = [dummy_path] + %W{-q -f --skip-bundle -T -G}
     params << '--database=%s' % database
     Rails::Dummy::Generator.start(params)
 
@@ -79,6 +78,8 @@ namespace :dummy do
   def patch_database_config(path)
     db_config_path = File.expand_path('config/database.yml', path)
     content = <<-YML
+development:
+  url: <%= ENV['DATABASE_URL'] %>
 test:
   url: <%= ENV['DATABASE_URL'] %>
     YML
