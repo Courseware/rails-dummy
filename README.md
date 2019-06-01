@@ -1,7 +1,6 @@
 # Rails::Dummy
 
 [![Build Status](https://travis-ci.org/Courseware/rails-dummy.png?branch=master)](https://travis-ci.org/Courseware/rails-dummy)
-
 A simple task to generate a dummy app for engines using RSpec or Test::Unit.
 
 ## Installation
@@ -28,23 +27,25 @@ Now you should be able to run:
 
     rake dummy:app
 
-## Customization by environment variables:
+## Customization via environment variables:
 
 `DUMMY_APP_PATH` - Specify path where dummy app will be located. Defaults to
 `spec/dummy`.
-
-`TEMPLATE` - Specify a Rails template by path location variable. Defaults to
-nil; creates generic Rails app.
 
 `ENGINE` - Specify engine name migrations to be installed via `rake
 ENGINE:install:migrations`. Defaults to nil; engine specific migrations are not
 installed.
 
-`ENGINE_DB` - Specify engine database. Defaults to `sqlite3`.
-
 `DISABLE_CREATE` - Don't run `db:create`.
 
 `DISABLE_MIGRATE` - Don't run `db:migrate db:test:prepare` after creating database.
+
+### Customization via `.dummyrc`
+
+In addition to the environment variables, you can create a `.dummyrc` file which
+will be picked up by the dummy application generator.
+
+This file follows [the same syntax as the `.railsrc` file](https://github.com/rails/rails/blob/master/railties/lib/rails/generators/rails/app/USAGE).
 
 ## Projects using this gem
 
