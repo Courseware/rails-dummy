@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe 'dummy:create', type: :task do
-
+describe 'dummy:db_create', type: :task do
   context 'when DISABLE_CREATE variable is set' do
     before do
       ENV['DISABLE_CREATE'] = '1'
@@ -32,5 +31,4 @@ describe 'dummy:create', type: :task do
       task.invoke
     end
   end
-
 end

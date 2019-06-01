@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'dummy:install_migrations', type: :task do
-
   context 'when ENGINE variable is set' do
     let(:engine_name) { 'TEST_ENGINE' }
 

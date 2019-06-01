@@ -5,7 +5,7 @@ namespace :dummy do
     'to overwrite the location and integrate with a Rails engine.'\
     'Create a .dummyrc (aka .railsrc) file to customize the generator options.'
   )
-  task :app => [:setup, :template, :install_migrations, :create, :migrate]
+  task :app => [:setup, :install_migrations, :db_create, :db_migrate]
 
   task :setup do
     FileUtils.rm_rf(dummy_path)
@@ -18,22 +18,6 @@ namespace :dummy do
     Rails::Dummy::Generator.start(params)
 
     patch_database_config(dummy_path) if ENV['ENGINE_DB']
-  end
-
-  task :template do
-    unless ENV['TEMPLATE']
-      Kernel.puts(
-        'No `TEMPLATE` environment variable was set, no template to apply.'
-      )
-    else
-      # File.expand_path is executed directory of generated Rails app
-      rakefile = File.expand_path('Rakefile', dummy_path)
-      template = File.expand_path(
-        ENV['TEMPLATE'], File.expand_path('../../', dummy_path))
-      command = "rake -f '%s' rails:template LOCATION='%s'" % [
-        rakefile, template]
-      sh(command)
-    end
   end
 
   task :install_migrations do
@@ -51,14 +35,14 @@ namespace :dummy do
     end
   end
 
-  task :create do
+  task :db_create do
     # File.expand_path is executed directory of generated Rails app
     rakefile = File.expand_path('Rakefile', dummy_path)
     command = "rake -f '%s' db:create" % rakefile
     sh(command) unless ENV["DISABLE_CREATE"]
   end
 
-  task :migrate do
+  task :db_migrate do
     # File.expand_path is executed directory of generated Rails app
     rakefile = File.expand_path('Rakefile', dummy_path)
     command = "rake -f '%s' db:migrate" % rakefile

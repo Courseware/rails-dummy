@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe 'dummy:migrate', type: :task do
-
+describe 'dummy:db_migrate', type: :task do
   context 'when DISABLE_MIGRATE variable is set' do
     before do
       ENV['DISABLE_MIGRATE'] = '1'
@@ -49,5 +48,4 @@ describe 'dummy:migrate', type: :task do
       task.invoke
     end
   end
-
 end
