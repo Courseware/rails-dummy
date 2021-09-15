@@ -12,8 +12,21 @@ namespace :dummy do
 
     params = [dummy_path] + %W{-q -f --skip-bundle -T -G}
 
-    params += File.read(File.expand_path('.dummyrc'))
-      .to_s.split("\n").compact if File.exists?('.dummyrc')
+    params = [dummy_path] + %W{-q -f --skip-bundle -T -G}
+
+    if File.exist?('.dummyrc')
+      File.readlines(File.expand_path('.dummyrc')).each do |option|
+        next if option.blank?
+        next if option.start_with?('#')
+
+        option.chomp!
+
+        value = option[/^(?:(?!#).)*/].strip
+        next if value.blank?
+
+        params << value
+      end
+    end
 
     Rails::Dummy::Generator.start(params)
 

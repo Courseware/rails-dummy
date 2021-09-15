@@ -19,7 +19,22 @@ describe 'dummy:setup', type: :task do
   end
 
   before do
-    File.write(File.expand_path('.dummyrc'), "--database=#{db_type}\n")
+    File.write(File.expand_path('.dummyrc'),
+      <<-BODY
+        # Available options:
+        # rails _4.2.11_ new --help
+
+        # Usage:
+        #   rails new APP_PATH [options]
+
+        # Options:
+        #   -r, [--ruby=PATH]  # Path to the Ruby binary of your choice
+        #                      # Default: ~/.asdf/installs/ruby/2.7.3/bin/ruby
+        # ....
+
+        --database=#{db_type} # Using custom database driver
+      BODY
+    )
   end
 
   after do
